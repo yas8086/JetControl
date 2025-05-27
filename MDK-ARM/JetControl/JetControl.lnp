@@ -1,0 +1,27 @@
+--cpu Cortex-M3
+"jetcontrol\startup_stm32f103xe.o"
+"jetcontrol\main.o"
+"jetcontrol\gpio.o"
+"jetcontrol\tim.o"
+"jetcontrol\usart.o"
+"jetcontrol\stm32f1xx_it.o"
+"jetcontrol\stm32f1xx_hal_msp.o"
+"jetcontrol\system_stm32f1xx.o"
+"jetcontrol\stm32f1xx_hal_gpio_ex.o"
+"jetcontrol\stm32f1xx_hal_tim.o"
+"jetcontrol\stm32f1xx_hal_tim_ex.o"
+"jetcontrol\stm32f1xx_hal.o"
+"jetcontrol\stm32f1xx_hal_rcc.o"
+"jetcontrol\stm32f1xx_hal_rcc_ex.o"
+"jetcontrol\stm32f1xx_hal_gpio.o"
+"jetcontrol\stm32f1xx_hal_dma.o"
+"jetcontrol\stm32f1xx_hal_cortex.o"
+"jetcontrol\stm32f1xx_hal_pwr.o"
+"jetcontrol\stm32f1xx_hal_flash.o"
+"jetcontrol\stm32f1xx_hal_flash_ex.o"
+"jetcontrol\stm32f1xx_hal_exti.o"
+"jetcontrol\stm32f1xx_hal_uart.o"
+--library_type=microlib --strict --scatter "JetControl\JetControl.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "JetControl.map" -o JetControl\JetControl.axf
