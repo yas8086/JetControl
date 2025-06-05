@@ -90,7 +90,7 @@ void Error_Handler(void);
 #define MAX_PWM_PUMP1            			 100   		 //粉阀最大开启
 #define USART1_MAX_RECV_LEN            20
 #define USART2_MAX_RECV_LEN            10
-#define TASKS_MAX                      2
+#define TASKS_MAX                      4
 
 #define FUNCTION_TEXT         0//功能测试代码（1为开，0为关）
 #define OIL_PUMP_ON   		 		HAL_GPIO_WritePin(OIL_PUMP_GPIO_Port,OIL_PUMP_Pin,GPIO_PIN_RESET)       //油泵开  低电平开

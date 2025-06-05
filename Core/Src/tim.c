@@ -24,6 +24,8 @@
 extern uint16_t CntRx1;
 extern uint16_t USART1_REC_STA;
 extern uint16_t Uart1_ReceiveData_flag;
+extern volatile bool sendOilPumpDataFlag;
+extern uint32_t OilPumpDataCount;
 extern UART_HandleTypeDef huart1;
 
 extern void TaskRemarks(void);
@@ -44,9 +46,13 @@ void TIM_SetCompare3(TIM_TypeDef* TIMx, uint16_t Compare3)
 //定时器中断处理函数
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
+	
 	//定时器2定1ms中断
 	if(htim==(&htim2))
   {
+		if(sendOilPumpDataFlag){
+			OilPumpDataCount += 1;
+		}
 		TaskRemarks();
 		if(CntRx1)				    
 		{

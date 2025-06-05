@@ -56,15 +56,20 @@ volatile uint16_t USART1_REC_STA=0;													//当前字节是连续的第几
 volatile uint16_t USART2_REC_STA=0;													//当前字节是连续的第几位
 volatile uint8_t respondDeviceID,respondDeviceValue;					//回应数据的ID和Value
 uint16_t RecCrc, CalcCrc;														//接收的CRC校验码和计算的CRC校验码
-volatile uint16_t CntRx1 = 15;																		//串口1接收时间标志位,7ms接收不到新数据，判定为1个包
-volatile uint16_t CntRx2;																		//串口2接收时间标志位,7ms接收不到新数据，判定为1个包
+volatile uint16_t CntRx1 = 15;																		//串口1接收时间标志位,15ms接收不到新数据，判定为1个包
+volatile uint16_t CntRx2 = 15;																		//串口2接收时间标志位,15ms接收不到新数据，判定为1个包
 //ecu
 uint8_t ecuByte0,ecuByte1,ecuByte2;
-uint16_t lastEngineValue=0, nowEngineValue=0;					                //上一个发动机的值
+uint8_t ecuID1_SW = 3;																											//默认紧急停车
+uint16_t lastEngineThrottleValue=0, nowEngineThrottleValue=0;					                //上一个发动机的值
+uint32_t engineRPM = 0;
 uint8_t USART2_Ecu_BUF[USART2_MAX_RECV_LEN];
+uint8_t USART2_Ecu_Oil_BUF[USART2_MAX_RECV_LEN];
 volatile bool sendEcuDataFlag = false;
 //油泵
 uint8_t oilByte0,oilByte1,oilByte2;
+volatile bool sendOilPumpDataFlag = 0;
+uint32_t OilPumpDataCount = 0;
 uint8_t EcuOilValue=0, SerialOilValue=0;					                //ecu返回的油泵信息、串口要控制的油泵信息
 uint8_t USART2_Oil_BUF[USART1_MAX_RECV_LEN];
 
@@ -81,9 +86,11 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 uint16_t crc16_calc( uint8_t *, uint8_t);														//CRC校验
 void get_rec_data(void);																								//解包函数
+void get_ecu_rec_data(void);
 void Water_Pump_change(uint8_t Value);
 void Powder_Pump_change(uint8_t Value);
 void Pump_reset();
+void oil_data_send(uint8_t param);
 uint8_t crc8_calc(uint8_t *data, uint8_t len);
 extern void delay_us(uint16_t);
 void TIM_SetCompare3(TIM_TypeDef* TIMx, uint16_t Compare3);
@@ -106,7 +113,8 @@ void response_data_send(uint8_t deviceID,uint8_t deviceValue)
 	uint8_t data_send[5] = {0};								//串口发送数据
 	data_send[0] = 0x0c;
 	data_send[1] = deviceID;
-	data_send[2] = deviceValue;		
+	data_send[2] = deviceValue;
+	engineRPM = (USART2_REC_BUF_Engine[0] & USART2_REC_BUF_Engine[1])*10;	
 	uint16_t resCrc = crc16_calc(data_send, 3);
 	data_send[3] = resCrc >> 8;
 	data_send[4] = resCrc & 0xff;
@@ -116,9 +124,22 @@ void response_data_send(uint8_t deviceID,uint8_t deviceValue)
 	#endif
 
 }
+//装载发送数据
+void oil_data_send(uint8_t param)
+{
+	uint8_t data_send[5] = {0};								//串口发送数据
+	data_send[0] = 0xFF;
+	data_send[1] = 0x20;
+	data_send[2] = param;
+	uint16_t resCrc = crc8_calc(data_send, 3);
+	data_send[3] = resCrc;
+
+	HAL_UART_Transmit(&huart2,data_send,4,1000);
+}
 //开机初始化
 void Initialize_function(void)
 {
+	Uart1_ReceiveData_flag = 0;
 	WATER_PUMP_OFF;
 //	TIM_SetCompare3(TIM1,0);
 	SYSTEM_LED_ON;
@@ -131,10 +152,13 @@ void get_rec_data(void)
 	if (USART1_REC_BUF[0] == 0x0C)
 	{
 		//水泵和粉阀0A、发动机0B、复位0C
-		//deviceid：油泵01、水泵02、粉阀03、发动机04、复位05
+		//泵阀    functionID:0x0A  deviceId   水泵：2  粉阀：3
+		//发动机  functionID:0x0B  deviceId    油泵：1 发动机紧急停车：0xA0  发动机停车：0xB0 发动机启动：0xC0
+		//复位    functionID:0x0C  deviceId   复位：5
 		//水泵通讯样例：
 		//打开：0C 0A 02 01 D6 E3
 		//关闭：0C 0A 02 00 16 22
+		//泵阀	0x0A
 		if(USART1_REC_BUF[1] == 0x0A)
 		{
 			RecCrc = ((uint16_t)USART1_REC_BUF[4] << 8) | USART1_REC_BUF[5];
@@ -155,8 +179,47 @@ void get_rec_data(void)
 				respondDeviceID = 0x00;
 				respondDeviceValue = USART1_REC_BUF[3];
 			}
+			sendDataFlag = true;
 		}
-		//复位
+		//发动机  functionID:0x0B  deviceId    油泵：1 发动机紧急停车：0xA0  发动机停车：0xB0 发动机启动：0xC0
+		//发动机  0x0B
+		else if(USART1_REC_BUF[1] == 0x0B)
+		{
+			RecCrc = ((uint16_t)USART1_REC_BUF[4] << 8) | USART1_REC_BUF[5];
+			CalcCrc = crc16_calc(USART1_REC_BUF, 4);
+			if(RecCrc != CalcCrc){
+				ecuID1_SW = 0x00;
+				nowEngineThrottleValue = 0;
+			}
+			else
+			{
+				//油泵	0x01
+				if(USART1_REC_BUF[2] == 0x01){
+					sendOilPumpDataFlag = true;
+					OilPumpDataCount = 0;
+				}
+				//紧急停车	0xA0
+				else if(USART1_REC_BUF[2] == 0xA0){
+					ecuID1_SW = 0x03;
+					nowEngineThrottleValue = 0;
+				}
+				//停车散热	0xB0
+				else if(USART1_REC_BUF[2] == 0xB0){
+					ecuID1_SW = 0x02;
+					nowEngineThrottleValue = 0;
+				}
+				//启动	0xC0
+				else if(USART1_REC_BUF[2] == 0xC0){
+					ecuID1_SW = 0x01;
+					nowEngineThrottleValue = (uint16_t)USART1_REC_BUF[3]*10;
+				}
+				else{
+					ecuID1_SW = 0x00;
+					nowEngineThrottleValue = 0;
+				}
+			}		
+		}
+		//复位	0x0C
 		else if(USART1_REC_BUF[1] == 0x0C)
 		{
 			RecCrc = ((uint16_t)USART1_REC_BUF[4] << 8) | USART1_REC_BUF[5];
@@ -166,7 +229,8 @@ void get_rec_data(void)
 				respondDeviceValue = USART1_REC_BUF[3];
 			}
 			else
-				Pump_reset();			
+				Pump_reset();
+			sendDataFlag = true;			
 		}
 		else{
 			respondDeviceID = 0x00;
@@ -176,9 +240,9 @@ void get_rec_data(void)
 	else{
 		respondDeviceID = 0x00;
 		respondDeviceValue = USART1_REC_BUF[3];
-	}
-	sendDataFlag = true;	
+	}		
 }
+
 //控制水泵
 void Water_Pump_change(uint8_t Value)
 {
@@ -269,8 +333,7 @@ void Task_USART1_Respond(void)
 
 		get_rec_data();
 		
-		
-
+		//泵阀
 		if(sendDataFlag == true){
 			response_data_send(respondDeviceID,respondDeviceValue);
 			sendDataFlag = false;
@@ -283,35 +346,51 @@ void Task_USART1_Respond(void)
 		__enable_irq();; // 退出临界区
 		
 	}
+
 }
-//发动机控制任务
-void Task_Engine_Control(void)
+//发动机油泵控制任务
+void Task_OilPump_Control(void)
 {
-//	printf("Task_Engine_Control\n");
-	TIM_SetCompare3(TIM1,50);
-	if(nowEngineValue!=lastEngineValue)
-	{
-		ecuByte0 = 0xFF;
-		ecuByte1 = (1<<4)+(2<<2)+(((uint8_t)(nowEngineValue>>8))&0x0F);
-		ecuByte2 = nowEngineValue & 0xFF;
-		USART2_Ecu_BUF[0] = ecuByte0;
-		USART2_Ecu_BUF[1] = ecuByte1;
-		USART2_Ecu_BUF[2] = ecuByte2;
-		USART2_Ecu_BUF[3] = crc8_calc(USART2_Ecu_BUF,3);
-		lastEngineValue = nowEngineValue;
-		sendEcuDataFlag = true;
+	//油泵
+	if(sendOilPumpDataFlag == true){
+		if(OilPumpDataCount <= 1300){
+			//串口2发送油泵数据
+			oil_data_send(0x01);
+		}
+		else{
+			sendOilPumpDataFlag = false;
+			OilPumpDataCount = 0;
+			oil_data_send(0x0D);
+		}
 	}
-	if(sendEcuDataFlag)
-	{
-		//这里发动机开机默认发送的数据还没写
-		HAL_UART_Transmit(&huart2,USART2_Ecu_BUF,4,1000);
-	}
+
 }
+//发动机油门控制任务
+void Task_Engine_Throttle_Control(void)
+{
+	ecuByte0 = 0xFF;
+	ecuByte1 = (1<<4)+(ecuID1_SW<<2)+(((uint8_t)(nowEngineThrottleValue>>8))&0x0F);
+	ecuByte2 = nowEngineThrottleValue & 0xFF;
+	USART2_Ecu_BUF[0] = ecuByte0;
+	USART2_Ecu_BUF[1] = ecuByte1;
+	USART2_Ecu_BUF[2] = ecuByte2;
+	USART2_Ecu_BUF[3] = crc8_calc(USART2_Ecu_BUF,3);
+	lastEngineThrottleValue = nowEngineThrottleValue;
+	HAL_UART_Transmit(&huart2,USART2_Ecu_BUF,4,1000);
+}
+//ECU解包任务
+void Task_get_ecu_rec_data(void)
+{
+//	printf("Task_get_ecu_rec_data\n");
+}
+
 //全部任务列表
 static TASK_COMPONENTS TaskComps[] = 
 {
-	{0, 10, 10, Task_USART1_Respond},												//串口1接收数据并处理
-	{0, 20, 20, Task_Engine_Control}												//串口2向发动机定时发送数据
+	{0, 10, 10, Task_USART1_Respond},																//串口1接收数据并处理
+	{0, 20, 20, Task_OilPump_Control},															//发动机油泵控制任务
+	{0, 20, 20, Task_Engine_Throttle_Control},											//串口2向发动机定时发送油门数据
+	{0, 10, 10, Task_get_ecu_rec_data}															//ECU解包任务
    // 这里添加你的任务。。。
 };
 /**************************************************************************************

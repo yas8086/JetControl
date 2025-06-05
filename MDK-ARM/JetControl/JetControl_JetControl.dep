@@ -1,8 +1,8 @@
 Dependencies for Project 'JetControl', Target 'JetControl': (DO NOT MODIFY !)
 CompilerVersion: 6140001::V6.14.1::ARMCLANG
 F (startup_stm32f103xe.s)(0x68302BA8)(--target=arm-arm-none-eabi -mcpu=cortex-m3 -masm=auto -c-gdwarf-3 -Wa,armasm,--pd,"__MICROLIB SETA 1"-I./RTE/_JetControl-ID:/Software/Keil_v5/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-ID:/Software/Keil_v5/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-Wa,armasm,--pd,"__UVISION_VERSION SETA 532" -Wa,armasm,--pd,"_RTE_ SETA 1" -Wa,armasm,--pd,"STM32F10X_HD SETA 1" -Wa,armasm,--pd,"_RTE_ SETA 1"-o jetcontrol/startup_stm32f103xe.o)
-F (../Core/Src/main.c)(0x683525CB)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_JetControl-ID:/Software/Keil_v5/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-ID:/Software/Keil_v5/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol/main.o -MD)
-I (..\Core\Inc\main.h)(0x6833CF34)
+F (../Core/Src/main.c)(0x68413468)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_JetControl-ID:/Software/Keil_v5/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-ID:/Software/Keil_v5/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol/main.o -MD)
+I (..\Core\Inc\main.h)(0x68412F90)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x6808972E)
 I (..\Core\Inc\stm32f1xx_hal_conf.h)(0x6628AA2A)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x6808972E)
@@ -41,7 +41,7 @@ I (D:\Software\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x5F51128E)
 I (..\Core\Inc\gpio.h)(0x6628976A)
 F (../Core/Src/gpio.c)(0x68302BA6)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_JetControl-ID:/Software/Keil_v5/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-ID:/Software/Keil_v5/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol/gpio.o -MD)
 I (..\Core\Inc\gpio.h)(0x6628976A)
-I (..\Core\Inc\main.h)(0x6833CF34)
+I (..\Core\Inc\main.h)(0x68412F90)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x6808972E)
 I (..\Core\Inc\stm32f1xx_hal_conf.h)(0x6628AA2A)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x6808972E)
@@ -71,9 +71,9 @@ I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pwr.h)(0x6808972E)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim.h)(0x6808972E)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim_ex.h)(0x6808972E)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_uart.h)(0x6808972E)
-F (../Core/Src/tim.c)(0x68302BA6)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_JetControl-ID:/Software/Keil_v5/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-ID:/Software/Keil_v5/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol/tim.o -MD)
+F (../Core/Src/tim.c)(0x683E5A84)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_JetControl-ID:/Software/Keil_v5/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-ID:/Software/Keil_v5/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol/tim.o -MD)
 I (..\Core\Inc\tim.h)(0x68302BA6)
-I (..\Core\Inc\main.h)(0x6833CF34)
+I (..\Core\Inc\main.h)(0x68412F90)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x6808972E)
 I (..\Core\Inc\stm32f1xx_hal_conf.h)(0x6628AA2A)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x6808972E)
@@ -108,9 +108,9 @@ I (D:\Software\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x5F51128E)
 I (D:\Software\Keil_v5\ARM\ARMCLANG\include\string.h)(0x5F51128E)
 I (D:\Software\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x5F51128E)
 I (D:\Software\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x5F51128E)
-F (../Core/Src/usart.c)(0x6830657F)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_JetControl-ID:/Software/Keil_v5/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-ID:/Software/Keil_v5/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol/usart.o -MD)
+F (../Core/Src/usart.c)(0x683FBCA3)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_JetControl-ID:/Software/Keil_v5/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-ID:/Software/Keil_v5/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol/usart.o -MD)
 I (..\Core\Inc\usart.h)(0x66418754)
-I (..\Core\Inc\main.h)(0x6833CF34)
+I (..\Core\Inc\main.h)(0x68412F90)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x6808972E)
 I (..\Core\Inc\stm32f1xx_hal_conf.h)(0x6628AA2A)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x6808972E)
@@ -145,7 +145,7 @@ I (D:\Software\Keil_v5\ARM\ARMCLANG\include\string.h)(0x5F51128E)
 I (D:\Software\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x5F51128E)
 I (D:\Software\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x5F51128E)
 F (../Core/Src/stm32f1xx_it.c)(0x682E7E7C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_JetControl-ID:/Software/Keil_v5/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-ID:/Software/Keil_v5/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol/stm32f1xx_it.o -MD)
-I (..\Core\Inc\main.h)(0x6833CF34)
+I (..\Core\Inc\main.h)(0x68412F90)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x6808972E)
 I (..\Core\Inc\stm32f1xx_hal_conf.h)(0x6628AA2A)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x6808972E)
@@ -177,7 +177,7 @@ I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim_ex.h)(0x6808972E)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_uart.h)(0x6808972E)
 I (..\Core\Inc\stm32f1xx_it.h)(0x682E7E7C)
 F (../Core/Src/stm32f1xx_hal_msp.c)(0x6628AA2A)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-3 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_JetControl-ID:/Software/Keil_v5/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-ID:/Software/Keil_v5/Arm/Packs/Keil/STM32F1xx_DFP/2.4.1/Device/Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol/stm32f1xx_hal_msp.o -MD)
-I (..\Core\Inc\main.h)(0x6833CF34)
+I (..\Core\Inc\main.h)(0x68412F90)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x6808972E)
 I (..\Core\Inc\stm32f1xx_hal_conf.h)(0x6628AA2A)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h)(0x6808972E)

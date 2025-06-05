@@ -3,7 +3,7 @@
 <title>Static Call Graph - [JetControl\JetControl.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image JetControl\JetControl.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6140101: Last Updated: Tue May 27 10:39:12 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6140101: Last Updated: Thu Jun  5 14:08:51 2025
 <BR><P>
 <H3>Maximum Stack Usage =        164 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -502,7 +502,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_IRQHandler
 </UL>
 
-<P><STRONG><a name="[5c]"></a>HAL_TIM_PeriodElapsedCallback</STRONG> (Thumb, 88 bytes, Stack size 8 bytes, tim.o(.text.HAL_TIM_PeriodElapsedCallback))
+<P><STRONG><a name="[5c]"></a>HAL_TIM_PeriodElapsedCallback</STRONG> (Thumb, 114 bytes, Stack size 8 bytes, tim.o(.text.HAL_TIM_PeriodElapsedCallback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = HAL_TIM_PeriodElapsedCallback
 </UL>
 <BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TaskRemarks
@@ -576,7 +576,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;response_data_send
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Engine_Control
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_OilPump_Control
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Engine_Throttle_Control
 </UL>
 
 <P><STRONG><a name="[64]"></a>HAL_UART_TxCpltCallback</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_hal_uart.o(.text.HAL_UART_TxCpltCallback))
@@ -663,19 +664,22 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(RESET)
 </UL>
-<P><STRONG><a name="[7b]"></a>TIM_SetCompare3</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, tim.o(.text.TIM_SetCompare3))
-<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Engine_Control
-</UL>
-
-<P><STRONG><a name="[61]"></a>TaskRemarks</STRONG> (Thumb, 76 bytes, Stack size 0 bytes, main.o(.text.TaskRemarks))
+<P><STRONG><a name="[61]"></a>TaskRemarks</STRONG> (Thumb, 140 bytes, Stack size 0 bytes, main.o(.text.TaskRemarks))
 <BR><BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_PeriodElapsedCallback
 </UL>
 
-<P><STRONG><a name="[7a]"></a>Task_Engine_Control</STRONG> (Thumb, 274 bytes, Stack size 8 bytes, main.o(.text.Task_Engine_Control))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Task_Engine_Control &rArr; HAL_UART_Transmit
+<P><STRONG><a name="[7a]"></a>Task_Engine_Throttle_Control</STRONG> (Thumb, 262 bytes, Stack size 8 bytes, main.o(.text.Task_Engine_Throttle_Control))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Task_Engine_Throttle_Control &rArr; HAL_UART_Transmit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SetCompare3
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
+<BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[7b]"></a>Task_OilPump_Control</STRONG> (Thumb, 118 bytes, Stack size 16 bytes, main.o(.text.Task_OilPump_Control))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = Task_OilPump_Control &rArr; HAL_UART_Transmit
+</UL>
+<BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -710,19 +714,20 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xe.o(RESET)
 </UL>
-<P><STRONG><a name="[7d]"></a>get_rec_data</STRONG> (Thumb, 586 bytes, Stack size 16 bytes, main.o(.text.get_rec_data))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = get_rec_data
+<P><STRONG><a name="[7d]"></a>get_rec_data</STRONG> (Thumb, 914 bytes, Stack size 24 bytes, main.o(.text.get_rec_data))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = get_rec_data
 </UL>
 <BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_USART1_Respond
 </UL>
 
-<P><STRONG><a name="[46]"></a>main</STRONG> (Thumb, 262 bytes, Stack size 64 bytes, main.o(.text.main))
+<P><STRONG><a name="[46]"></a>main</STRONG> (Thumb, 304 bytes, Stack size 64 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 164<LI>Call Chain = main &rArr; MX_USART2_UART_Init &rArr; HAL_UART_Init &rArr; HAL_UART_MspInit &rArr; HAL_GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_USART1_Respond
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Engine_Control
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_OilPump_Control
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Engine_Throttle_Control
 <LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART2_UART_Init
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_UART_Init
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_TIM2_Init
@@ -737,7 +742,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
-<P><STRONG><a name="[7e]"></a>response_data_send</STRONG> (Thumb, 226 bytes, Stack size 16 bytes, main.o(.text.response_data_send))
+<P><STRONG><a name="[7e]"></a>response_data_send</STRONG> (Thumb, 260 bytes, Stack size 16 bytes, main.o(.text.response_data_send))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = response_data_send &rArr; HAL_UART_Transmit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
