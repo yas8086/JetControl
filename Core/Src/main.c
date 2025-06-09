@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -46,26 +47,37 @@
 
 /* USER CODE BEGIN PV */
 //应答：respond  接收：receive
-volatile uint8_t Uart1_ReceiveData_flag = 0;                      //串口接收数据标志
+volatile uint8_t Uart1_ReceiveData_flag = 0;                      //串口1接收数据标志
 uint8_t USART1_REC_BUF[USART1_MAX_RECV_LEN];        //接收数据包缓冲区
-uint8_t USART2_REC_BUF_Engine[4];                   //发动机数据包
+uint8_t USART2_REC_BUF_Engine[USART1_MAX_RECV_LEN];                   //发动机数据包
 volatile bool sendDataFlag;																	//是否回应数据标志位
 volatile uint8_t	UART1_temp[1];              								//串口1当前接收字节
-volatile uint8_t	UART2_temp[1];              								//串口2当前接收字节
 volatile uint16_t USART1_REC_STA=0;													//当前字节是连续的第几位
-volatile uint16_t USART2_REC_STA=0;													//当前字节是连续的第几位
 volatile uint8_t respondDeviceID,respondDeviceValue;					//回应数据的ID和Value
 uint16_t RecCrc, CalcCrc;														//接收的CRC校验码和计算的CRC校验码
-volatile uint16_t CntRx1 = 15;																		//串口1接收时间标志位,15ms接收不到新数据，判定为1个包
-volatile uint16_t CntRx2 = 15;																		//串口2接收时间标志位,15ms接收不到新数据，判定为1个包
+volatile uint16_t CntRx1 = 0;																		//串口1接收时间标志位,15ms接收不到新数据，判定为1个包
+
 //ecu
 uint8_t ecuByte0,ecuByte1,ecuByte2;
 uint8_t ecuID1_SW = 3;																											//默认紧急停车
 uint16_t lastEngineThrottleValue=0, nowEngineThrottleValue=0;					                //上一个发动机的值
-uint32_t engineRPM = 0;
+volatile uint8_t Uart2_ReceiveData_flag = 0;                      //串口2接收数据标志
 uint8_t USART2_Ecu_BUF[USART2_MAX_RECV_LEN];
+volatile uint16_t CntRx2 = 0;																		//串口2接收时间标志位,15ms接收不到新数据，判定为1个包
+volatile uint16_t USART2_REC_STA=0;													//当前字节是连续的第几位
+volatile uint8_t	UART2_temp[1];              								//串口2当前接收字节
 uint8_t USART2_Ecu_Oil_BUF[USART2_MAX_RECV_LEN];
 volatile bool sendEcuDataFlag = false;
+//ecu参数
+uint8_t ecuParaByteSend[13]={0};
+uint16_t engineRPM = 0;
+uint8_t powerVoltage = 0;
+uint16_t current = 0;
+uint8_t pumpVoltage = 0;
+uint16_t temp = 0;
+uint8_t ECode = 0;
+uint8_t engineState = 0;
+
 //油泵
 uint8_t oilByte0,oilByte1,oilByte2;
 volatile bool sendOilPumpDataFlag = 0;
@@ -86,7 +98,7 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 uint16_t crc16_calc( uint8_t *, uint8_t);														//CRC校验
 void get_rec_data(void);																								//解包函数
-void get_ecu_rec_data(void);
+void get_ecu_rec_data(uint8_t* data);
 void Water_Pump_change(uint8_t Value);
 void Powder_Pump_change(uint8_t Value);
 void Pump_reset();
@@ -114,7 +126,6 @@ void response_data_send(uint8_t deviceID,uint8_t deviceValue)
 	data_send[0] = 0x0c;
 	data_send[1] = deviceID;
 	data_send[2] = deviceValue;
-	engineRPM = (USART2_REC_BUF_Engine[0] & USART2_REC_BUF_Engine[1])*10;	
 	uint16_t resCrc = crc16_calc(data_send, 3);
 	data_send[3] = resCrc >> 8;
 	data_send[4] = resCrc & 0xff;
@@ -243,6 +254,30 @@ void get_rec_data(void)
 	}		
 }
 
+//解包函数
+void get_ecu_rec_data(uint8_t* data)
+{
+	if(data[0] == 0x01)
+	{
+		engineRPM = (data[2] << 8) + data[1];
+		engineState = data[3] & 0x0F;
+		temp = (((uint16_t)(data[4] & 0x0E)) << 8) + (uint16_t)(data[5]);
+			
+	}
+	else if(data[0] == 0x02)
+	{
+		engineRPM = (data[2] << 8) + data[1];
+		powerVoltage = data[4];
+	}
+	else if(data[0] == 0x04)
+	{
+		engineRPM = (data[2] << 8) + data[1];
+		current = ((data[4] & 0x01) << 8) + data[3];
+	}
+	else{
+		engineRPM = (data[2] << 8) + data[1];
+	}
+}
 //控制水泵
 void Water_Pump_change(uint8_t Value)
 {
@@ -324,6 +359,43 @@ uint8_t crc8_calc(uint8_t *data, uint8_t len){
     }
     return crc8;
 }
+//串口2空闲中断
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
+{
+	if(huart->Instance == USART2)
+	{
+		uint32_t tmp_flag ;
+		tmp_flag  = __HAL_UART_GET_FLAG(&huart2, UART_FLAG_IDLE);
+
+//		if( tmp_flag  != RESET)
+//		{
+			__HAL_UART_CLEAR_IDLEFLAG(&huart2);//清除标志位
+			HAL_UART_DMAStop(&huart2); //停止DMA接收，防止数据出错			
+			get_ecu_rec_data(USART2_REC_BUF_Engine);
+			ecuParaByteSend[0] = 0xFF;
+			ecuParaByteSend[1] = engineRPM & 0xFF;
+			ecuParaByteSend[2] = engineRPM >> 8;
+			ecuParaByteSend[3] = powerVoltage;
+			ecuParaByteSend[4] = current & 0xFF;
+			ecuParaByteSend[5] = current >> 8;
+			ecuParaByteSend[6] = pumpVoltage;
+			ecuParaByteSend[7] = temp & 0xFF;
+			ecuParaByteSend[8] = temp >> 8;
+			ecuParaByteSend[9] = ECode;
+			ecuParaByteSend[10] = engineState;
+			uint16_t resCrc = crc16_calc(ecuParaByteSend, 11);
+			ecuParaByteSend[11] = resCrc >> 8;
+			ecuParaByteSend[12] = resCrc & 0xff;
+			HAL_UART_Transmit(&huart1,ecuParaByteSend,13,1000);
+			USART2_REC_STA = 0;
+			if(Uart2_ReceiveData_flag)
+				Uart2_ReceiveData_flag = 0;
+			memset(USART2_REC_BUF_Engine, 0, sizeof (USART2_REC_BUF_Engine));
+//		}
+		HAL_UARTEx_ReceiveToIdle_DMA(&huart2,USART2_REC_BUF_Engine,USART1_MAX_RECV_LEN);		// 再次开启DMA空闲中断
+	}
+}	
+
 /**************************************多任务调度*******************************************/
 //回答上位机请求任务
 void Task_USART1_Respond(void)
@@ -381,7 +453,10 @@ void Task_Engine_Throttle_Control(void)
 //ECU解包任务
 void Task_get_ecu_rec_data(void)
 {
-//	printf("Task_get_ecu_rec_data\n");
+	//ecuParaByteSend
+//	get_ecu_rec_data();
+
+
 }
 
 //全部任务列表
@@ -390,7 +465,7 @@ static TASK_COMPONENTS TaskComps[] =
 	{0, 10, 10, Task_USART1_Respond},																//串口1接收数据并处理
 	{0, 20, 20, Task_OilPump_Control},															//发动机油泵控制任务
 	{0, 20, 20, Task_Engine_Throttle_Control},											//串口2向发动机定时发送油门数据
-	{0, 10, 10, Task_get_ecu_rec_data}															//ECU解包任务
+	{0, 20, 20, Task_get_ecu_rec_data}															//ECU解包任务
    // 这里添加你的任务。。。
 };
 /**************************************************************************************
@@ -464,6 +539,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_TIM2_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
@@ -473,7 +549,9 @@ int main(void)
 	
 	//启动串口接收
 	HAL_UART_Receive_IT(&huart1, (uint8_t *)UART1_temp, 1);
-	HAL_UART_Receive_IT(&huart2, (uint8_t *)UART2_temp, 1);
+//	HAL_UART_Receive_IT(&huart2, (uint8_t *)UART2_temp, 1);
+//	__HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE); //使能IDLE中断
+	HAL_UARTEx_ReceiveToIdle_DMA(&huart2,USART2_REC_BUF_Engine,USART1_MAX_RECV_LEN);		// 再次开启DMA空闲中断
 	//开启定时器中断----->1ms
 	__HAL_TIM_CLEAR_IT(&htim2, TIM_IT_UPDATE);
 	HAL_TIM_Base_Start_IT(&htim2);

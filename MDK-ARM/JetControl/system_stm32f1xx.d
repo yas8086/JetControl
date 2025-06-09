@@ -1,30 +1,29 @@
-jetcontrol/system_stm32f1xx.o: ..\Core\Src\system_stm32f1xx.c \
-  ..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h \
-  ..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xe.h \
-  ..\Drivers\CMSIS\Include\core_cm3.h \
-  D:\Software\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
-  ..\Drivers\CMSIS\Include\cmsis_version.h \
-  ..\Drivers\CMSIS\Include\cmsis_compiler.h \
-  ..\Drivers\CMSIS\Include\cmsis_armclang.h \
-  D:\Software\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
-  D:\Software\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_acle.h \
-  ..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h \
-  ..\Core\Inc\stm32f1xx_hal_conf.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_def.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h \
-  D:\Software\Keil_v5\ARM\ARMCLANG\Bin\..\include\stddef.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_exti.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_dma.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_dma_ex.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_cortex.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pwr.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim_ex.h \
-  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_uart.h
+jetcontrol\system_stm32f1xx.o: ../Core/Src/system_stm32f1xx.c
+jetcontrol\system_stm32f1xx.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xe.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/CMSIS/Include/core_cm3.h
+jetcontrol\system_stm32f1xx.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/CMSIS/Include/cmsis_version.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
+jetcontrol\system_stm32f1xx.o: ../Core/Inc/stm32f1xx_hal_conf.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
+jetcontrol\system_stm32f1xx.o: D:\Software\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+jetcontrol\system_stm32f1xx.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
