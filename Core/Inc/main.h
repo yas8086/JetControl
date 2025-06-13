@@ -95,10 +95,10 @@ void Error_Handler(void);
 #define FUNCTION_TEXT         0//功能测试代码（1为开，0为关）
 #define OIL_PUMP_ON   		 		HAL_GPIO_WritePin(OIL_PUMP_GPIO_Port,OIL_PUMP_Pin,GPIO_PIN_RESET)       //油泵开  低电平开
 #define OIL_PUMP_OFF 		      HAL_GPIO_WritePin(OIL_PUMP_GPIO_Port,OIL_PUMP_Pin,GPIO_PIN_SET)				//油泵关
-//#define WATER_PUMP_ON        	HAL_GPIO_WritePin(OIL_PUMP_GPIO_Port,OIL_PUMP_Pin,GPIO_PIN_RESET)     //水泵开
-//#define WATER_PUMP_OFF 		    HAL_GPIO_WritePin(OIL_PUMP_GPIO_Port,OIL_PUMP_Pin,GPIO_PIN_SET)		//水泵关
-#define WATER_PUMP_ON        	HAL_GPIO_WritePin(WATER_PUMP_GPIO_Port,WATER_PUMP_Pin,GPIO_PIN_RESET)     //水泵开
-#define WATER_PUMP_OFF 		    HAL_GPIO_WritePin(WATER_PUMP_GPIO_Port,WATER_PUMP_Pin,GPIO_PIN_SET)		//水泵关
+#define WATER_PUMP_ON        	HAL_GPIO_WritePin(OIL_PUMP_GPIO_Port,OIL_PUMP_Pin,GPIO_PIN_RESET)     //水泵开
+#define WATER_PUMP_OFF 		    HAL_GPIO_WritePin(OIL_PUMP_GPIO_Port,OIL_PUMP_Pin,GPIO_PIN_SET)		//水泵关
+//#define WATER_PUMP_ON        	HAL_GPIO_WritePin(WATER_PUMP_GPIO_Port,WATER_PUMP_Pin,GPIO_PIN_RESET)     //水泵开
+//#define WATER_PUMP_OFF 		    HAL_GPIO_WritePin(WATER_PUMP_GPIO_Port,WATER_PUMP_Pin,GPIO_PIN_SET)		//水泵关
 #define POWDER_PUMP_ON        	HAL_GPIO_WritePin(POWDER_PUMP_GPIO_Port,POWDER_PUMP_Pin,GPIO_PIN_RESET)     //粉阀开
 #define POWDER_PUMP_OFF 		    HAL_GPIO_WritePin(POWDER_PUMP_GPIO_Port,POWDER_PUMP_Pin,GPIO_PIN_SET)				//粉阀关
 //#define PWM_PUMP1_ON   		 		HAL_GPIO_WritePin(PWM_PUMP1_GPIO_Port,PWM_PUMP1_Pin,GPIO_PIN_RESET)     //粉阀开

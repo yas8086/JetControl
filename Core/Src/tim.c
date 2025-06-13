@@ -52,9 +52,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	//定时器2定1ms中断
 	if(htim==(&htim2))
   {
-		if(sendOilPumpDataFlag){
-			OilPumpDataCount += 1;
-		}
+//		if(sendOilPumpDataFlag){
+//			OilPumpDataCount += 1;
+//		}
 		TaskRemarks();
 		if(CntRx1)				    
 		{
@@ -64,14 +64,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 				Uart1_ReceiveData_flag = 1;
 			}
 		}
-		if(CntRx2)				    
-		{
-			if(--CntRx2==0)	    	    //计数器减到0 ，7ms定时到
-			{
-				USART2_REC_STA|=1<<15;   //标志为接收完成
-				Uart2_ReceiveData_flag = 1;
-			}
-		}
+//		if(CntRx2)				    
+//		{
+//			if(--CntRx2==0)	    	    //计数器减到0 ，7ms定时到
+//			{
+//				USART2_REC_STA|=1<<15;   //标志为接收完成
+//				Uart2_ReceiveData_flag = 1;
+//			}
+//		}
 		__HAL_TIM_CLEAR_IT(&htim2, TIM_IT_UPDATE);
   }
 }

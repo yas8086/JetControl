@@ -1,8 +1,8 @@
 Dependencies for Project 'JetControl', Target 'JetControl': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
-F (startup_stm32f103xe.s)(0x68469580)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include--pd "__UVISION_VERSION SETA 532" --pd "_RTE_ SETA 1" --pd "STM32F10X_HD SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f103xe.lst --xref -o jetcontrol\startup_stm32f103xe.o --depend jetcontrol\startup_stm32f103xe.d)
-F (../Core/Src/main.c)(0x68469BC1)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol\main.o --omf_browse jetcontrol\main.crf --depend jetcontrol\main.d)
-I (../Core/Inc/main.h)(0x68412F90)
+F (startup_stm32f103xe.s)(0x684A29E4)(--cpu Cortex-M3 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include--pd "__UVISION_VERSION SETA 532" --pd "_RTE_ SETA 1" --pd "STM32F10X_HD SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f103xe.lst --xref -o jetcontrol\startup_stm32f103xe.o --depend jetcontrol\startup_stm32f103xe.d)
+F (../Core/Src/main.c)(0x684A7D80)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol\main.o --omf_browse jetcontrol\main.crf --depend jetcontrol\main.d)
+I (../Core/Inc/main.h)(0x684A47A3)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x6808972E)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6846957F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x6808972E)
@@ -40,7 +40,7 @@ I (D:\Software\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5F63877C)
 I (../Core/Inc/gpio.h)(0x6628976A)
 F (../Core/Src/gpio.c)(0x68302BA6)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol\gpio.o --omf_browse jetcontrol\gpio.crf --depend jetcontrol\gpio.d)
 I (../Core/Inc/gpio.h)(0x6628976A)
-I (../Core/Inc/main.h)(0x68412F90)
+I (../Core/Inc/main.h)(0x684A47A3)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x6808972E)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6846957F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x6808972E)
@@ -68,9 +68,9 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x6808972E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x6808972E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x6808972E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x6808972E)
-F (../Core/Src/dma.c)(0x6846957E)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol\dma.o --omf_browse jetcontrol\dma.crf --depend jetcontrol\dma.d)
+F (../Core/Src/dma.c)(0x684A29E2)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol\dma.o --omf_browse jetcontrol\dma.crf --depend jetcontrol\dma.d)
 I (../Core/Inc/dma.h)(0x6846957E)
-I (../Core/Inc/main.h)(0x68412F90)
+I (../Core/Inc/main.h)(0x684A47A3)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x6808972E)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6846957F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x6808972E)
@@ -98,9 +98,9 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x6808972E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x6808972E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x6808972E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x6808972E)
-F (../Core/Src/tim.c)(0x68468272)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol\tim.o --omf_browse jetcontrol\tim.crf --depend jetcontrol\tim.d)
+F (../Core/Src/tim.c)(0x6848E667)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol\tim.o --omf_browse jetcontrol\tim.crf --depend jetcontrol\tim.d)
 I (../Core/Inc/tim.h)(0x68302BA6)
-I (../Core/Inc/main.h)(0x68412F90)
+I (../Core/Inc/main.h)(0x684A47A3)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x6808972E)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6846957F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x6808972E)
@@ -133,9 +133,9 @@ I (D:\Software\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5F63877C)
 I (D:\Software\Keil_v5\ARM\ARMCC\include\string.h)(0x5F63878A)
 I (D:\Software\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5F63877C)
 I (D:\Software\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5F63877C)
-F (../Core/Src/usart.c)(0x684695AA)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol\usart.o --omf_browse jetcontrol\usart.crf --depend jetcontrol\usart.d)
+F (../Core/Src/usart.c)(0x684A29E2)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol\usart.o --omf_browse jetcontrol\usart.crf --depend jetcontrol\usart.d)
 I (../Core/Inc/usart.h)(0x66418754)
-I (../Core/Inc/main.h)(0x68412F90)
+I (../Core/Inc/main.h)(0x684A47A3)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x6808972E)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6846957F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x6808972E)
@@ -167,8 +167,8 @@ I (D:\Software\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5F63877C)
 I (D:\Software\Keil_v5\ARM\ARMCC\include\string.h)(0x5F63878A)
 I (D:\Software\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5F63877C)
 I (D:\Software\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5F63877C)
-F (../Core/Src/stm32f1xx_it.c)(0x6846957E)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol\stm32f1xx_it.o --omf_browse jetcontrol\stm32f1xx_it.crf --depend jetcontrol\stm32f1xx_it.d)
-I (../Core/Inc/main.h)(0x68412F90)
+F (../Core/Src/stm32f1xx_it.c)(0x684A29E2)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol\stm32f1xx_it.o --omf_browse jetcontrol\stm32f1xx_it.crf --depend jetcontrol\stm32f1xx_it.d)
+I (../Core/Inc/main.h)(0x684A47A3)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x6808972E)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6846957F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x6808972E)
@@ -196,9 +196,9 @@ I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h)(0x6808972E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h)(0x6808972E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h)(0x6808972E)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h)(0x6808972E)
-I (../Core/Inc/stm32f1xx_it.h)(0x6846957F)
+I (../Core/Inc/stm32f1xx_it.h)(0x684A29E2)
 F (../Core/Src/stm32f1xx_hal_msp.c)(0x6628AA2A)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I.\RTE\_JetControl-ID:\Software\Keil_v5\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Software\Keil_v5\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_HD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xE-o jetcontrol\stm32f1xx_hal_msp.o --omf_browse jetcontrol\stm32f1xx_hal_msp.crf --depend jetcontrol\stm32f1xx_hal_msp.d)
-I (../Core/Inc/main.h)(0x68412F90)
+I (../Core/Inc/main.h)(0x684A47A3)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h)(0x6808972E)
 I (../Core/Inc/stm32f1xx_hal_conf.h)(0x6846957F)
 I (../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h)(0x6808972E)

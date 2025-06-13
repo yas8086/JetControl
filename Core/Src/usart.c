@@ -26,7 +26,7 @@
 extern volatile uint16_t CntRx1;																	//串口1接收时间标志位
 extern volatile uint16_t CntRx2;																	//串口2接收时间标志位
 extern uint8_t USART1_REC_BUF[USART1_MAX_RECV_LEN];			//接收数据包缓冲区
-extern uint8_t USART2_REC_BUF_Engine[4];                //发动机数据包
+extern uint8_t USART2_REC_BUF_Engine[USART1_MAX_RECV_LEN];                //发动机数据包
 extern volatile uint8_t	UART1_temp[1];              								//串口1当前接收字节
 extern volatile uint8_t	UART2_temp[1];              								//串口2当前接收字节
 extern uint16_t USART1_REC_STA;													//串口1 当前接收数据字节为连续第几个
@@ -39,6 +39,7 @@ extern uint8_t Uart2_ReceiveData_flag;										//uart1是否接收到数据标�
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart2_rx;
+DMA_HandleTypeDef hdma_usart2_tx;
 
 /* USART1 init function */
 
@@ -84,7 +85,7 @@ void MX_USART2_UART_Init(void)
   huart2.Instance = USART2;
   huart2.Init.BaudRate = 9600;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
-  huart2.Init.StopBits = UART_STOPBITS_1;
+  huart2.Init.StopBits = UART_STOPBITS_2;
   huart2.Init.Parity = UART_PARITY_NONE;
   huart2.Init.Mode = UART_MODE_TX_RX;
   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
@@ -173,6 +174,22 @@ void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
 
     __HAL_LINKDMA(uartHandle,hdmarx,hdma_usart2_rx);
 
+    /* USART2_TX Init */
+    hdma_usart2_tx.Instance = DMA1_Channel7;
+    hdma_usart2_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
+    hdma_usart2_tx.Init.PeriphInc = DMA_PINC_DISABLE;
+    hdma_usart2_tx.Init.MemInc = DMA_MINC_ENABLE;
+    hdma_usart2_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    hdma_usart2_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    hdma_usart2_tx.Init.Mode = DMA_NORMAL;
+    hdma_usart2_tx.Init.Priority = DMA_PRIORITY_LOW;
+    if (HAL_DMA_Init(&hdma_usart2_tx) != HAL_OK)
+    {
+      Error_Handler();
+    }
+
+    __HAL_LINKDMA(uartHandle,hdmatx,hdma_usart2_tx);
+
     /* USART2 interrupt Init */
     HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(USART2_IRQn);
@@ -221,6 +238,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 
     /* USART2 DMA DeInit */
     HAL_DMA_DeInit(uartHandle->hdmarx);
+    HAL_DMA_DeInit(uartHandle->hdmatx);
 
     /* USART2 interrupt Deinit */
     HAL_NVIC_DisableIRQ(USART2_IRQn);
@@ -254,19 +272,19 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 		HAL_UART_Receive_IT(huart, (uint8_t*)UART1_temp, 1);
 		UNUSED(huart);
 	}
-	//串口2
-	else{
-		if(USART2_REC_STA<USART2_MAX_RECV_LEN)		//还可以接收数据
-		{
-			USART2_REC_BUF_Engine[USART2_REC_STA] = UART2_temp[0];
-			USART2_REC_STA++;
-			CntRx2=7; 
-		}else{
-			USART2_REC_STA|=1<<15;					//强制标记接收完成
-			Uart2_ReceiveData_flag = 1;
-		}
-		HAL_UART_Receive_DMA(huart, (uint8_t*)UART2_temp, 1);
-		UNUSED(huart);
-	}
+//	//串口2
+//	else{
+//		if(USART2_REC_STA<USART2_MAX_RECV_LEN)		//还可以接收数据
+//		{
+//			USART2_REC_BUF_Engine[USART2_REC_STA] = UART2_temp[0];
+//			USART2_REC_STA++;
+//			CntRx2=7; 
+//		}else{
+//			USART2_REC_STA|=1<<15;					//强制标记接收完成
+//			Uart2_ReceiveData_flag = 1;
+//		}
+//		HAL_UART_Receive_DMA(huart, (uint8_t*)UART2_temp, 1);
+//		UNUSED(huart);
+//	}
 }
 /* USER CODE END 1 */
